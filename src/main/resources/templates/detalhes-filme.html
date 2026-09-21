@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do filme</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>Detalhes de <span th:text="${filme.titulo}"></span>:</h1>
+    
+    <ul>
+        <li>Título oficial: <p th:text="${filme.titulo}">.</p></li>
+        <li>Gênero: <p th:text="${filme.genero}">.</p></li>
+        <li>Sinopse: <p th:text="${filme.sinopse}">.</p></li>
+        <li>Ano de lançamento: <p th:text="${filme.anoLancamento}">.</p></li>
+    </ul>
+
+    <a th:href="@{/cadastrar-analise(id=${filme.id})}"><button>Adicionar análise</button> </a>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Filme</th>
+                <th>Análise</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="analise : ${analises}">
+                <td th:text="${analise.id}"></td>
+                <td th:text="${analise.filme.titulo}"></td>
+                <td th:text="${analise.analise}"></td>
+                <td th:text="${analise.nota}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/lista-filmes}"><button>Voltar</button> </a>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista completa de filmes</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>Lista completa dos filmes:</h1>
+    <br>
+    <a th:href="@{/cadastro-filme}">
+        <button>Cadastrar novo filme</button>
+    </a>
+    <br>
+    <br>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Gênero</th>
+                <th>Ano de Lançamento</th>
+                <th>Sinopse curta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="filme : ${filmes}">
+                <td th:text="${filme.id}"></td>
+                <td><a th:href="@{/detalhes-filme(id=${filme.id})}" th:text="${filme.titulo}"></a></td>
+                <td th:text="${filme.genero}"></td>
+                <td th:text="${filme.anoLancamento}"></td>
+                <td th:text="${filme.sinopse}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>

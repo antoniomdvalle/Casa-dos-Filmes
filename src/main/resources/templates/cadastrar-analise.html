@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar análise</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <h1>Análise de <span th:text="${filme?.titulo}"></span>:</h1>
+    <form th:action="@{/cadastrar-analise}" method="POST">
+        <input type="hidden" name="filmeId" th:value="${filme.id}">
+        <p>Id: <input type="text" th:field="${analise.id}"></p>
+        <p>Filme: <input type="text" th:placeholder="${filme.titulo}" disabled></p>
+        <p>Avaliação: <input type="text" th:field="${analise.analise}"></p>
+        <p>Nota: <input type="text" th:field="${analise.nota}"></p>
+        <button type="submit">Adicionar avaliação</button>
+    </form>
+</body>
+</html>
