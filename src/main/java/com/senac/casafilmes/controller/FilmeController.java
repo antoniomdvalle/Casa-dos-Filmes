@@ -18,11 +18,6 @@ public class FilmeController {
     private List<Filme> filmes = new ArrayList<>();
     private List<Analise> analises = new ArrayList<>();
 
-    public FilmeController(){
-        filmes.add(new Filme(1, "Kill Bill", "Beatrix Kiddo seeks revenge against the man who took everything away from her.", "Violência", 2003));
-        filmes.add(new Filme(2, "Pulp Fiction", "Two guys try to survive in a city filled with drugs and gangs.", "Violência", 1994));
-    }
-
     @GetMapping("/detalhes-filme")
     public String mostraDetalhes(@RequestParam("id") int id, Model model){
         Filme f = filmes.stream().filter(filme -> filme.getId() == id).findFirst().orElse(null);
