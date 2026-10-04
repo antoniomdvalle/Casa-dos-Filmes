@@ -1,73 +1,62 @@
 package com.senac.casafilmes.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.ui.Model;
-
-import org.springframework.stereotype.Controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import com.senac.casafilmes.model.*;
+import com.senac.casafilmes.model.Filme;
+import com.senac.casafilmes.service.FilmeService;
 
-@Controller 
+@RestController 
+@RequestMapping("/filme")
 public class FilmeController {
-    private List<Filme> filmes = new ArrayList<>();
-    private List<Analise> analises = new ArrayList<>();
 
-    @GetMapping("/detalhes-filme")
-    public String mostraDetalhes(@RequestParam("id") int id, Model model){
-        Filme f = filmes.stream().filter(filme -> filme.getId() == id).findFirst().orElse(null);
-        List<Analise> analisesDoFilme = analises.stream().filter(a -> a.getFilme() != null && a.getFilme().getId() == id).toList();
-        
-        model.addAttribute("analises", analisesDoFilme);
-        model.addAttribute("filme", f);
+    @Autowired 
+    FilmeService filmeService;
 
-        return "detalhes-filme";
+    // -------------- GET MAPPING --------------
+    @GetMapping("/listar")
+    public ResponseEntity<List> getAllFilmes(){
+        List<Filme> filmes = filmeService.listAllFilmes();
+        return new ResponseEntity<>(filmes, HttpStatus.OK);
     }
 
 
-    @GetMapping("/lista-filmes")
-    public String mostrarLista(Model model){
-
-        model.addAttribute("filmes", filmes);
-
-        return "lista-filmes";
+    @GetMapping("/pesquisar/{id}")
+    public ResponseEntity<Filme> getFilmeById(@PathVariable Integer id){
+        Filme filme = filmeService.getFilmeId(id);
+        return new ResponseEntity<>(filme, HttpStatus.OK);
     }
 
-
-    @GetMapping("/cadastro-filme")
-    public String mostrarFormulario(Model model){
-        model.addAttribute("filme", new Filme());
-        return "cadastro-filme";
+    // -------------- POST MAPPING --------------
+    @PostMapping("/cadastro")
+    public ResponseEntity<Filme> cadastrarFilme(@RequestBody Filme filme){
+        var filme2 = filmeService.criarFilme(filme);
+        return new ResponseEntity<>(filme2, HttpStatus.CREATED);
+        //"redirect:/detalhes-filme?id=" + filme.getId()
     }
 
-
-    @PostMapping("/cadastro-filme")
-    public String processarFormulario(Model model, @ModelAttribute Filme filme){
-        model.addAttribute("filme", filme);
-        filmes.add(filme);
-        return "redirect:/detalhes-filme?id=" + filme.getId();
+    // -------------- PUT MAPPING --------------
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<Filme> atualizarFilme(@PathVariable Integer id, @RequestBody Filme filme){
+        var filmeAtualizado = filmeService.atualizarFilme(id, filme);
+        return new ResponseEntity<>(filmeAtualizado, HttpStatus.OK);
     }
 
-    
-    @GetMapping("/cadastrar-analise")
-    public String exibirFormularioAnalise(@RequestParam("id") int id, Model model){
-        Filme f = filmes.stream().filter(filme -> filme.getId() == id).findFirst().orElse(null);
-        model.addAttribute("filme", f);
-        model.addAttribute("analise", new Analise());
-        return "cadastrar-analise";
-    }
-
-    @PostMapping("/cadastrar-analise")
-    public String processarFormularioAnalise(@RequestParam("filmeId") int filmeId, @ModelAttribute Analise analise){
-        
-        Filme filmeEncontrado = filmes.stream().filter(f -> f.getId() == filmeId).findFirst().orElse(null);
-        analise.setFilme(filmeEncontrado);
-        analises.add(analise);
-        return "redirect:/detalhes-filme?id=" + filmeId;
+        // -------------- DELETE MAPPING --------------
+    @DeleteMapping("/deletar/{id}")
+    public ResponseEntity deletarFilme(@PathVariable Integer id){
+        filmeService.deletarFilme(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

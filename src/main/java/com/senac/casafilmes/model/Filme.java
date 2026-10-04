@@ -12,8 +12,8 @@ import lombok.Data;
 @Table(name="Filme")
 public class Filme {
     @Id 
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Integer id;
     private String titulo;
     private String sinopse;
     private String genero;
