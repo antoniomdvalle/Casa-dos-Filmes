@@ -11,6 +11,9 @@ import com.senac.casafilmes.model.FilmeRepository;
 
 import com.senac.casafilmes.model.AnaliseRepository;
 
+import com.senac.casafilmes.exception.ResourceNotFoundException;
+
+
 @Service 
 public class AnaliseService {
     @Autowired 
@@ -41,7 +44,7 @@ public class AnaliseService {
     }
 
     public Analise getAnaliseId(Integer idAnalise){
-        return analiseRepository.findById(idAnalise).orElse(null);
+        return analiseRepository.findById(idAnalise).orElseThrow(() -> new ResourceNotFoundException("Análise não encontrada."));
     }
 
     public List<Analise> listarAnalises(){

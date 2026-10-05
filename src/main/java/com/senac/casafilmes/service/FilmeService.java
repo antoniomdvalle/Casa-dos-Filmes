@@ -9,6 +9,9 @@ import com.senac.casafilmes.model.Filme;
 
 import com.senac.casafilmes.model.FilmeRepository;
 
+
+import com.senac.casafilmes.exception.ResourceNotFoundException;
+
 @Service 
 public class FilmeService {
 
@@ -36,7 +39,7 @@ public class FilmeService {
 
 
     public Filme getFilmeId(Integer filmeId){
-        return filmeRepository.findById(filmeId).orElse(null);
+        return filmeRepository.findById(filmeId).orElseThrow(() -> new ResourceNotFoundException("Filme não encontrado."));
     }
 
 

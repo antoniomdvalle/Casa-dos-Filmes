@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.senac.casafilmes.model.Analise;
 import com.senac.casafilmes.service.AnaliseService;
 
+import jakarta.validation.Valid;
+
 @RestController 
 @RequestMapping("/analise")
-public class AnaliseController {
+public class APIAnaliseController {
     @Autowired 
     AnaliseService analiseService;
 
@@ -37,7 +39,7 @@ public class AnaliseController {
 
     // -------------- POST MAPPING --------------
     @PostMapping("/cadastro/filme/{filmeId}")
-    public ResponseEntity<Analise> cadastrarAnalise(@RequestBody Analise Analise, @PathVariable Integer filmeId){
+    public ResponseEntity<Analise> cadastrarAnalise(@Valid @RequestBody Analise Analise, @PathVariable Integer filmeId){
         Analise novaAnalise = analiseService.criarAnalise(filmeId, Analise);
         return new ResponseEntity<>(novaAnalise, HttpStatus.CREATED);
     }
@@ -51,7 +53,7 @@ public class AnaliseController {
  
     // -------------- DELETE MAPPING --------------
     @DeleteMapping("/deletar/{id}")
-    public ResponseEntity deletarAnalise(@PathVariable Integer id){
+    public ResponseEntity<Void> deletarAnalise(@PathVariable Integer id){
         analiseService.deletarAnalise(id);
         return ResponseEntity.ok().build();
     }
