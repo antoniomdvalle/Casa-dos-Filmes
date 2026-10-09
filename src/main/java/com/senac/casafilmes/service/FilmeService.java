@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.senac.casafilmes.model.AnaliseRepository;
 import com.senac.casafilmes.model.Filme;
 
 import com.senac.casafilmes.model.FilmeRepository;
 
+import jakarta.transaction.Transactional;
 
 import com.senac.casafilmes.exception.ResourceNotFoundException;
 
@@ -17,6 +19,9 @@ public class FilmeService {
 
     @Autowired 
     FilmeRepository filmeRepository;
+
+    @Autowired 
+    AnaliseRepository analiseRepository;
 
 
     public Filme criarFilme(Filme f){
@@ -47,9 +52,11 @@ public class FilmeService {
         return filmeRepository.findAll();
     }
 
-
+    @Transactional 
     public void deletarFilme(Integer filmeId){
-        Filme f = getFilmeId(filmeId);
-        filmeRepository.deleteById(f.getId());
+
+        analiseRepository.deleteById(filmeId);
+
+        filmeRepository.deleteById(filmeId);
     }
 }

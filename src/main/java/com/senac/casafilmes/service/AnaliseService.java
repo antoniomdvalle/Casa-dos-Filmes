@@ -30,7 +30,11 @@ public class AnaliseService {
     public Analise atualizarAnalise(Integer idAnalise, Analise analiseRequisicao){
         Analise analise = getAnaliseId(idAnalise);
 
-        analise.setFilme(analiseRequisicao.getFilme());
+        if (analiseRequisicao.getFilme() != null){
+            analise.setFilme(analiseRequisicao.getFilme());
+        }
+
+        
         analise.setNota(analiseRequisicao.getNota());
         analise.setAnalise(analiseRequisicao.getAnalise());
 

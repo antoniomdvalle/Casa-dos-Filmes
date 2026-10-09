@@ -1,11 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atualizar</title>
-</head>
+    <title>Atualizar dados</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"></head>
 <body>
+    <div class="container">
+        <h1>Atualizar dados do filme</h1>
+        <hr>
+        <h2>Atualizar cadastro do filme</h2>
+        <form action="#" th:action="@{/salvarFilme}" th:object="${filme}" method="POST">
+            <!-- Campo oculto para o ID (para quando for edição) -->
+            <input type="hidden" th:field="*{id}">
+
+            <input type="text" th:field="*{titulo}" placeholder="Insira o título" class="form-control mt-4 col-4">
+            <span class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
+            <input type="text" th:field="*{sinopse}" placeholder="Insira a sinopse" class="form-control mt-4 col-4">
+            <span class="text-danger" th:if="${#fields.hasErrors('sinopse')}" th:errors="*{sinopse}"></span>
+
+            <input type="text" th:field="*{genero}" placeholder="Insira o gênero" class="form-control mt-4 col-4">
+            <span class="text-danger" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></span>
+
+            <input type="number" th:field="*{anoLancamento}" placeholder="Insira o ano de lançamento" class="form-control mt-4 col-4">
+            <span class="text-danger" th:if="${#fields.hasErrors('anoLancamento')}" th:errors="*{anoLancamento}"></span>
+
+            <button type="submit" class="btn btn-info mt-4">Salvar</button>
+        </form>
+        <hr>
+        <a th:href="@{/}">Retornar</a>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row">
+        <div class="col-12">
+            <h3>Análises do Filme</h3>
+            
+            <!-- botão para adicionar nova análise (passando o ID do filme na URL) -->
+            <a th:href="@{/criarAnaliseForm/{id}(id=${filme.id})}" class="btn btn-success btn-sm mb-3">
+                Adicionar Nova Análise
+            </a>
+
+            <table border="1" class="table table-striped table-responsive-md">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nota</th>
+                        <th>Análise</th>
+                        <th>Operações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="analise : ${listaAnalises}">
+                        <td th:text="${analise.id}"></td>
+                        <td th:text="${analise.nota}"></td>
+                        <td th:text="${analise.analise}"></td>
+                        <td> 
+                            <a th:href="@{/atualizarAnaliseForm/{id}(id=${analise.id})}" class="btn btn-primary btn-sm">Editar</a>
+                            <a th:href="@{/deletarAnalise/{id}(id=${analise.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza?');">Excluir</a>
+                        </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(listaAnalises)}">
+                        <td colspan="4" class="text-center">Nenhuma análise cadastrada.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     
 </body>
 </html>

@@ -1,4 +1,5 @@
 package com.senac.casafilmes.controller;
+import com.senac.casafilmes.service.AnaliseService;
 import com.senac.casafilmes.service.FilmeService;
 import com.senac.casafilmes.model.Filme;
 
@@ -17,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class FilmeController {
     @Autowired 
     FilmeService filmeService;
+
+    @Autowired 
+    AnaliseService analiseService;
 
     @GetMapping("/")
     public String viewHomePage(Model model){
@@ -55,12 +59,7 @@ public class FilmeController {
     public String atualizarFilmeForm(@PathVariable(value = "id") Integer id, Model model){
         Filme filme = filmeService.getFilmeId(id);
         model.addAttribute("filme", filme);
+        model.addAttribute("listaAnalises", analiseService.listarAnalisesPorFilme(id));
         return "atualizar";
     }
-
-    /*
-    Criando um CRUD de funcionários
-No NetBeans, na pasta “Other Sources/src/main/resources/templates”, clique com o botão direito do mouse e selecione New > 
-HTML File e crie três arquivos com nomes “index.html”, “atualizar.html” e “inserir.html”. Veja como ficará a estrutura do 
-projeto a seguir: */
 }
