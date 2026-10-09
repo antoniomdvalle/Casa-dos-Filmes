@@ -43,9 +43,8 @@ public class APIFilmesController {
     // -------------- POST MAPPING --------------
     @PostMapping("/cadastro")
     public ResponseEntity<Filme> cadastrarFilme(@Valid @RequestBody Filme filme){
-        var filme2 = filmeService.criarFilme(filme);
-        return new ResponseEntity<>(filme2, HttpStatus.CREATED);
-        //"redirect:/detalhes-filme?id=" + filme.getId()
+        Filme novoFilme = filmeService.criarFilme(filme);
+        return new ResponseEntity<>(novoFilme, HttpStatus.CREATED);
     }
 
     // -------------- PUT MAPPING --------------

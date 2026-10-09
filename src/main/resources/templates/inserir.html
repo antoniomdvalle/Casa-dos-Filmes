@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="utf-8">
         <title>Inserir novo Filme</title>
@@ -9,21 +9,17 @@
             <h1>Gerenciar filmes na plataforma</h1>
             <hr>
             <h2>Adicionar filme</h2>
-            <form action="#" th:action="@{/salvarFilme}" th:object="${filme}" method="POST">
-                <input type="text" th:field="*{titulo}" placeholder="Insira o título" class="form-control mt-4 col-4">
-                <span class="text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></span>
-                <input type="text" th:field="*{sinopse}" placeholder="Insira a sinopse" class="form-control mt-4 col-4">
-                <span class="text-danger" th:if="${#fields.hasErrors('sinopse')}" th:errors="*{sinopse}"></span>
-                <input type="text" th:field="*{genero}" placeholder="Insira o gênero" class="form-control mt-4 col-4">
-                <span class="text-danger" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></span>
-                <input type="number" th:field="*{anoLancamento}" placeholder="Insira o ano de lançamento" class="form-control mt-4 col-4">
-                <span class="text-danger" th:if="${#fields.hasErrors('anoLancamento')}" th:errors="*{anoLancamento}"></span>
-                <button type="submit" class="btn btn-info mt-4"> Salvar</button>
+            <form id="formCadastrarFilme">
+                <input type="text" placeholder="Insira o título" class="form-control mt-4 col-4" id="titulo">
+                <input type="text" placeholder="Insira a sinopse" class="form-control mt-4 col-4"id="sinopse">
+                <input type="text" placeholder="Insira o gênero" class="form-control mt-4 col-4" id="genero">
+                <input type="number" placeholder="Insira o ano de lançamento" class="form-control mt-4 col-4" id="anoLancamento">
+                <button type="submit" class="btn btn-success">Salvar Filme</button>
             </form>
             <hr>
-            <a th:href="@{/}"> Retornar</a>
+            <a href="/" class="btn btn-secondary"> Retornar</a>
         </div>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script th:src="@{/js/script.js}"></script>
     </body>
 </html>

@@ -1,4 +1,5 @@
-<!DOCTYPE html> <html lang="en" xmlns:th="http://www.thymeleaf.org"> 
+<!DOCTYPE html> 
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
     <head> 
         <meta charset="utf-8"> 
         <title>Gerenciamento de Filmes</title> 
@@ -6,7 +7,7 @@
     <body> 
         <div class="container my-2"> 
             <h1>Lista de Filmes</h1> 
-            <a th:href="@{/criarFilmeForm}" class="btn btn-primary btn-sm mb-3"> Adicionar </a> 
+            <a href="" class="btn btn-primary btn-sm mb-3"> Adicionar </a> 
             <table border="1" class="table table-striped table-responsive-md"> 
                 <thead> 
                     <tr> 
@@ -19,20 +20,20 @@
                     </tr> 
                 </thead> 
                 <tbody> 
-                    <tr th:each="filme : ${listarFilmes}"> 
-                        <td th:text="${filme.id}"></td> 
-                        <td th:text="${filme.titulo}"></td> 
-                        <td th:text="${filme.sinopse}"></td>  
-                        <td th:text="${filme.genero}"></td> 
-                        <td th:text="${filme.anoLancamento}"></td> 
-                        <td> <a th:href="@{/atualizarFilmeForm/{id}(id=${filme.id})}" class="btn btn-primary">Atualizar</a> 
-                            <a th:href="@{/deletarFilme/{id}(id=${filme.id})}" class="btn btn-danger" onclick="return confirm('Tem certeza?');">Excluir</a> 
+                    <tr each="filme : ${listarFilmes}"> 
+                        <td text="${filme.id}"></td> 
+                        <td text="${filme.titulo}"></td> 
+                        <td text="${filme.sinopse}"></td>  
+                        <td text="${filme.genero}"></td> 
+                        <td text="${filme.anoLancamento}"></td> 
+                        <td> <a href="" class="btn btn-primary">Atualizar</a> 
+                            <a href="" class="btn btn-danger" onclick="return confirm('Tem certeza?');">Excluir</a> 
                         </td> 
                     </tr> 
                 </tbody> 
             </table>  
         </div> 
         <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+    <script th:src="@{/js/script.js}"></script>
     </body>     
 </html>

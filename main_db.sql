@@ -2,4 +2,4 @@
 
 use casafilmes;
 
-select * from analise;
+select * from filme;
