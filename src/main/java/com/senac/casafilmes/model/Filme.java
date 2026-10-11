@@ -12,6 +12,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import java.util.List;
 import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Data 
 @Entity 
@@ -33,6 +34,7 @@ public class Filme {
     @NotNull(message = "Favor informar o ano de lançamento.")
     private int anoLancamento;
 
+    @JsonManagedReference 
     @OneToMany(mappedBy = "filme", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Analise> analises;
 }

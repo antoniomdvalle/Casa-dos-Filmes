@@ -10,6 +10,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Data 
 @Entity 
@@ -19,6 +20,7 @@ public class Analise {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonBackReference 
     @NotNull(message = "Por favor, digite o filme dessa análise.")
     @ManyToOne 
     @JoinColumn(name="filme_id")
