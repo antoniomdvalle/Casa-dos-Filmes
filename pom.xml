@@ -13,6 +13,7 @@
 
     <groupId>com.senac</groupId>
     <artifactId>casafilmes</artifactId>
+    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
     <name>casafilmes</name>
     <description>Projeto Casa Filmes - Senac</description>

@@ -1,5 +1,5 @@
-#create database casafilmes;
+CREATE DATABASE IF NOT EXISTS casafilmes;
 
-use casafilmes;
+USE casafilmes;
 
-select * from analise;
+SELECT * FROM analise;

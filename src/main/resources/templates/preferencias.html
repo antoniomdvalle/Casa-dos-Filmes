@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Casa Filmes - Preferências</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">    </head>
+</head>
+
+<body class="container py-5">
+
+    <h1>Preferências de exibição</h1>
+
+    <form th:action="@{/preferencias}" method="POST">
+
+        <div class="mb-3">
+            <label for="estilo" class="form-label">
+                Escolha o tema:
+            </label>
+
+            <select name="estilo" id="estilo"
+                    class="form-select">
+                <option value="claro">Tema claro</option>
+                <option value="escuro">Tema escuro</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Salvar preferências
+        </button>
+
+        <a th:href="@{/}" class="btn btn-secondary">
+            Voltar
+        </a>
+
+    </form>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script th:src="@{/js/script.js}"></script>
+</body>
+</html>

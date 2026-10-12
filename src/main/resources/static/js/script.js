@@ -86,7 +86,6 @@ $("#formCadastrarFilme").submit(function (event) {
         data: JSON.stringify(filme),
 
         success: function(response){
-            alert('Filme cadastrado!');
             window.location.href = '/'; // redireciona pra lista no caso
             console.log(response);
         },
@@ -123,7 +122,6 @@ function atualizarFilme(id, filme){
         contentType: 'application/json',
         data: JSON.stringify(filme),
         success: function (data){
-            alert("Filme atualizado com sucesso!");
             window.location.href = "/";
         },
         error: function(xhr){
@@ -158,7 +156,6 @@ $.ajax({
     url: "http://localhost:8080/filme/deletar/" + id,
     method: "DELETE",
     success: function(data){
-        alert("Filme excluído com sucesso.");
         carregarFilmes();
     },
     error: function (xhr){
