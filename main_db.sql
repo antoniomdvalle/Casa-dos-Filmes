@@ -1,5 +1,5 @@
-
+#create database casafilmes;
 
 use casafilmes;
 
-select * from filme;
+select * from analise;

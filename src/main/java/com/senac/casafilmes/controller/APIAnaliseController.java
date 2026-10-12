@@ -39,7 +39,7 @@ public class APIAnaliseController {
 
     // -------------- POST MAPPING --------------
     @PostMapping("/cadastro/filme/{filmeId}")
-    public ResponseEntity<Analise> cadastrarAnalise(@Valid @RequestBody Analise Analise, @PathVariable Integer filmeId){
+    public ResponseEntity<Analise> cadastrarAnalise(@RequestBody Analise Analise, @PathVariable Integer filmeId){
         Analise novaAnalise = analiseService.criarAnalise(filmeId, Analise);
         return new ResponseEntity<>(novaAnalise, HttpStatus.CREATED);
     }

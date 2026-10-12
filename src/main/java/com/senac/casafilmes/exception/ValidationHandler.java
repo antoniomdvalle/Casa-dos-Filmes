@@ -20,8 +20,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler; 
 
-import org.springframework.web.bind.annotation.ControllerAdvice; 
-
 
 public class ValidationHandler extends ResponseEntityExceptionHandler{
     
